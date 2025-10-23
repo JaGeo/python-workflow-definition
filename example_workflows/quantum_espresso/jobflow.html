@@ -1,0 +1,1508 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>jobflow &#8212; Python Workflow Definition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/quantum_espresso/jobflow';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyiron" href="pyiron_base.html" />
+    <link rel="prev" title="Aiida" href="aiida.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python Workflow Definition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python Workflow Definition
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/quantum_espresso/jobflow.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/example_workflows/quantum_espresso/jobflow.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>jobflow</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-jobflow">Define workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jobflow">
+<h1>jobflow<a class="headerlink" href="#jobflow" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://materialsproject.github.io/jobflow/index.html"><code class="docutils literal notranslate"><span class="pre">jobflow</span></code></a> and <a class="reference external" href="https://materialsproject.github.io/atomate2/index.html"><code class="docutils literal notranslate"><span class="pre">atomate2</span></code></a> are key packages of the <a class="reference external" href="https://materialsproject.org/">Materials Project</a> . <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> was especially designed to simplify the execution of dynamic workflows – when the actual number of jobs is dynamically determined upon runtime instead of being statically fixed before running the workflow(s). <code class="docutils literal notranslate"><span class="pre">jobflow</span></code>’s overall flexibility allows for building workflows that go beyond the usage in materials science. <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> serves as the basis of <code class="docutils literal notranslate"><span class="pre">atomate2</span></code>, which implements data generation workflows in the context of materials science and will be used for data generation in the Materials Project in the future.</p>
+<section id="define-workflow-with-jobflow">
+<h2>Define workflow with jobflow<a class="headerlink" href="#define-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>We start by importing the job decorator and Flow class from <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and the respective PWD tools.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span><span class="p">,</span> <span class="n">Flow</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="quantum-espresso-workflow">
+<h2>Quantum Espresso Workflow<a class="headerlink" href="#quantum-espresso-workflow" title="Link to this heading">#</a></h2>
+<p>We will use the knowledge from the previous arithmetic workflow example to create the Quantum Espresso-related tasks for calculating an “Energy vs. Volume” curve. It’s important to note that this is only a basic implementation, and further extensions towards data validation or for a simplified user experience can be added. For example, one can typically configure run commands for quantum-chemical programs via configuration files in atomate2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_qe</span> <span class="k">as</span> <span class="n">_calculate_qe</span><span class="p">,</span> 
+    <span class="n">generate_structures</span> <span class="k">as</span> <span class="n">_generate_structures</span><span class="p">,</span> 
+    <span class="n">get_bulk_structure</span> <span class="k">as</span> <span class="n">_get_bulk_structure</span><span class="p">,</span> 
+    <span class="n">plot_energy_volume_curve</span> <span class="k">as</span> <span class="n">_plot_energy_volume_curve</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;jobflow_qe.json&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_qe</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_calculate_qe</span><span class="p">)</span>
+<span class="n">generate_structures</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_generate_structures</span><span class="p">)</span>
+<span class="n">plot_energy_volume_curve</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_plot_energy_volume_curve</span><span class="p">)</span>
+<span class="n">get_bulk_structure</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_bulk_structure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to specify the typical QE input like pseudopotential(s) and structure model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pseudopotentials</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Al&quot;</span><span class="p">:</span> <span class="s2">&quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structure</span> <span class="o">=</span> <span class="n">get_bulk_structure</span><span class="p">(</span>
+    <span class="n">element</span><span class="o">=</span><span class="s2">&quot;Al&quot;</span><span class="p">,</span>
+    <span class="n">a</span><span class="o">=</span><span class="mf">4.04</span><span class="p">,</span>
+    <span class="n">cubic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calc_mini</span> <span class="o">=</span> <span class="n">calculate_qe</span><span class="p">(</span>
+    <span class="n">working_directory</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span><span class="p">,</span>
+    <span class="n">input_dict</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="n">structure</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+        <span class="s2">&quot;pseudopotentials&quot;</span><span class="p">:</span> <span class="n">pseudopotentials</span><span class="p">,</span>
+        <span class="s2">&quot;kpts&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">&quot;calculation&quot;</span><span class="p">:</span> <span class="s2">&quot;vc-relax&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;smearing&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, for the “Energy vs. Volume” curve, we meed to specify the number of strained structures and save them into a list object. For each of the strained structures, we will carry out a QE calculation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_strains</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">structure_lst</span> <span class="o">=</span> <span class="n">generate_structures</span><span class="p">(</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">calc_mini</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+    <span class="n">strain_lst</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">number_of_strains</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job_strain_lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_strains</span><span class="p">):</span>
+    <span class="n">calc_strain</span> <span class="o">=</span> <span class="n">calculate_qe</span><span class="p">(</span>
+        <span class="n">working_directory</span><span class="o">=</span><span class="s2">&quot;strain_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+        <span class="n">input_dict</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">structure_lst</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;s_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;pseudopotentials&quot;</span><span class="p">:</span> <span class="n">pseudopotentials</span><span class="p">,</span>
+            <span class="s2">&quot;kpts&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="s2">&quot;calculation&quot;</span><span class="p">:</span> <span class="s2">&quot;scf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;smearing&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">job_strain_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calc_strain</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we specify a plotter for the “Energy vs. Volume” curve and can export the workflow.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_energy_volume_curve</span><span class="p">(</span>
+    <span class="n">volume_lst</span><span class="o">=</span><span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">volume</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">job_strain_lst</span><span class="p">],</span>
+    <span class="n">energy_lst</span><span class="o">=</span><span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">energy</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">job_strain_lst</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">([</span><span class="n">structure</span><span class="p">,</span> <span class="n">calc_mini</span><span class="p">,</span> <span class="n">structure_lst</span><span class="p">]</span> <span class="o">+</span> <span class="n">job_strain_lst</span> <span class="o">+</span> <span class="p">[</span><span class="n">plot</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">flow</span><span class="o">=</span><span class="n">flow</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="o">{</span>workflow_json_filename<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_bulk_structure&quot;
+    },
+    {
+      &quot;id&quot;: 1,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.generate_structures&quot;
+    },
+    {
+      &quot;id&quot;: 3,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 6,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 7,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.plot_energy_volume_curve&quot;
+    },
+    {
+      &quot;id&quot;: 9,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;element&quot;,
+      &quot;value&quot;: &quot;Al&quot;
+    },
+    {
+      &quot;id&quot;: 10,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;a&quot;,
+      &quot;value&quot;: 4.04
+    },
+    {
+      &quot;id&quot;: 11,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;cubic&quot;,
+      &quot;value&quot;: true
+    },
+    {
+      &quot;id&quot;: 12,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_0&quot;,
+      &quot;value&quot;: &quot;mini&quot;
+    },
+    {
+      &quot;id&quot;: 13,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 14,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;pseudopotentials&quot;,
+      &quot;value&quot;: {
+        &quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;
+      }
+    },
+    {
+      &quot;id&quot;: 15,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;kpts&quot;,
+      &quot;value&quot;: [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      &quot;id&quot;: 16,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_0&quot;,
+      &quot;value&quot;: &quot;vc-relax&quot;
+    },
+    {
+      &quot;id&quot;: 17,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;smearing&quot;,
+      &quot;value&quot;: 0.02
+    },
+    {
+      &quot;id&quot;: 18,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;strain_lst&quot;,
+      &quot;value&quot;: [
+        0.9,
+        0.9500000000000001,
+        1.0,
+        1.05,
+        1.1
+      ]
+    },
+    {
+      &quot;id&quot;: 19,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_1&quot;,
+      &quot;value&quot;: &quot;strain_0&quot;
+    },
+    {
+      &quot;id&quot;: 20,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 21,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_1&quot;,
+      &quot;value&quot;: &quot;scf&quot;
+    },
+    {
+      &quot;id&quot;: 22,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_2&quot;,
+      &quot;value&quot;: &quot;strain_1&quot;
+    },
+    {
+      &quot;id&quot;: 23,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 24,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_3&quot;,
+      &quot;value&quot;: &quot;strain_2&quot;
+    },
+    {
+      &quot;id&quot;: 25,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 26,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_4&quot;,
+      &quot;value&quot;: &quot;strain_3&quot;
+    },
+    {
+      &quot;id&quot;: 27,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 28,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_5&quot;,
+      &quot;value&quot;: &quot;strain_4&quot;
+    },
+    {
+      &quot;id&quot;: 29,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 30,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 31,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 32,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;element&quot;,
+      &quot;source&quot;: 9,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;a&quot;,
+      &quot;source&quot;: 10,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;cubic&quot;,
+      &quot;source&quot;: 11,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 12,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 0,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 16,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 13,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 1,
+      &quot;sourcePort&quot;: &quot;structure&quot;
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;strain_lst&quot;,
+      &quot;source&quot;: 18,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 19,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_0&quot;
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_1&quot;
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 24,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_2&quot;
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_3&quot;
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 28,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_4&quot;
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 29,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;volume_lst&quot;,
+      &quot;source&quot;: 30,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;energy_lst&quot;,
+      &quot;source&quot;: 31,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 32,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 8,
+      &quot;sourcePort&quot;: null
+    }
+  ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-workflow-with-aiida">
+<h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p>Now, we can import the workflow, run it with <code class="docutils literal notranslate"><span class="pre">aiida</span></code> and plot the “Energy vs. Volume” curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
+
+<span class="n">load_profile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;1682a1dbda304ec998030372ef5350ab&#39; name=&#39;pwd&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">get_bulk_structure1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mf">4.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "e9bb01de73ff4284a7578d7064ae369f"}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/26/2025 04:59:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure1
+05/26/2025 04:59:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_bulk_structure1, type: PyFunction, finished.
+05/26/2025 04:59:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10
+05/26/2025 04:59:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
+05/26/2025 04:59:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe2
+[jupyter-pythonworkflow-fl--x---218119f8:02569] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 04:59:56 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
+05/26/2025 04:59:57 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe2, type: PyFunction, finished.
+05/26/2025 04:59:57 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures3
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: generate_structures3, type: PyFunction, finished.
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict11,get_dict12,get_dict13,get_dict14,get_dict15
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict11, type: PyFunction, finished.
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe4,get_dict12,get_dict13,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02586] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe4, type: PyFunction, finished.
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict13,get_dict14,get_dict15
+05/26/2025 05:00:11 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
+05/26/2025 05:00:11 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe5,get_dict13,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02596] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe5, type: PyFunction, finished.
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13,get_dict14,get_dict15
+05/26/2025 05:00:23 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
+05/26/2025 05:00:23 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02606] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict15
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
+05/26/2025 05:00:36 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe7,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02616] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:00:50 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe7, type: PyFunction, finished.
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict15
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict15, type: PyFunction, finished.
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8
+[jupyter-pythonworkflow-fl--x---218119f8:02626] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
+05/26/2025 05:01:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16,get_list17
+05/26/2025 05:01:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
+05/26/2025 05:01:07 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
+05/26/2025 05:01:07 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
+05/26/2025 05:01:07 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve9
+05/26/2025 05:01:08 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve9, type: PyFunction, finished.
+05/26/2025 05:01:08 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/26/2025 05:01:08 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|finalize]: Finalize workgraph.
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+<section id="load-workflow-with-pyiron-base">
+<h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p>And we can repeat the same process using <code class="docutils literal notranslate"><span class="pre">pyiron</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c4a7b7438914bc4d8a2af98fd80cb1fe1108c75ae2410c1e308e2918b1de01d0.svg" src="../../_images/c4a7b7438914bc4d8a2af98fd80cb1fe1108c75ae2410c1e308e2918b1de01d0.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_bulk_structure_2ca4aeae204ceaa28593c93054b07908 was saved and received the ID: 1
+The job get_dict_1e47509b88d63a21fd421686554c8f4a was saved and received the ID: 2
+The job calculate_qe_411e578f2700d09ba2df9a4c682b4582 was saved and received the ID: 3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02656] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_structures_550221ce8aa27fbdf50dbf13e059ce24 was saved and received the ID: 4
+The job get_dict_68a4c6ff00bffbd8f249d6022ec8abb2 was saved and received the ID: 5
+The job calculate_qe_8e11594357cf470d576634593684ae66 was saved and received the ID: 6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02670] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_64aacd2badb7b0a126a5662dabd1ce0c was saved and received the ID: 7
+The job calculate_qe_95276d45f24b5e6e645aab15a3b853df was saved and received the ID: 8
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02680] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_7079cab3db71ad163cfc2e39fcf98688 was saved and received the ID: 9
+The job calculate_qe_3c1dbc8b42e651e328ae99033a426980 was saved and received the ID: 10
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02690] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_0e89a9ec0ef1fd918240aa8d2dc44178 was saved and received the ID: 11
+The job calculate_qe_2550d6d1ccd7ab3d68c384d3887a3fe3 was saved and received the ID: 12
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02700] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_2ac7f25535cfa6c6850c0f9af197b541 was saved and received the ID: 13
+The job calculate_qe_10d82eb36a247279f62c63b70e1a55d2 was saved and received the ID: 14
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02710] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_list_e21c87f95f3795055e7214eec6d7c927 was saved and received the ID: 15
+The job get_list_61df540ee8a34a06782249cbe8834865 was saved and received the ID: 16
+The job plot_energy_volume_curve_bbe171c30a8de804ba8d4227e65e62bf was saved and received the ID: 17
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+<section id="load-workflow-with-pyiron-workflow">
+<h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">get_bulk_structure</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">4.05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a1745bc5b97604c9bc0ee74c2c5f923c1221b809d84fcb202681237924200325.svg" src="../../_images/a1745bc5b97604c9bc0ee74c2c5f923c1221b809d84fcb202681237924200325.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02722] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02738] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02748] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02758] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02768] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02778] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;plot_energy_volume_curve__plot_energy_volume_curve&#39;: None}
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./example_workflows/quantum_espresso"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aiida.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Aiida</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyiron_base.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyiron</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-jobflow">Define workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
